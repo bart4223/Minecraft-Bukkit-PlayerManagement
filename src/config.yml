@@ -1,0 +1,4 @@
+## YAML Template.
+---
+MaxSPHistoryItems : 10 
+MaxShownSPListItems : 3

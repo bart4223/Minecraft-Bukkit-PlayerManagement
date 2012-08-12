@@ -1,0 +1,22 @@
+## YAML Template.
+name: PlayerManagement
+main: com.mahn42.bart4223.PlayerManagement.PlayerManagement
+version: 0.1
+depend: [MAHN42-Framework]
+commands:
+   pm_splist:
+      description: list player social points
+      usage: /pm_splist <Playername>
+      aliases: pmspl
+   pm_warning:
+      description: utters a player warning
+      usage: /pm_warning <Playername> <Points> <Reason>
+      aliases: pmw
+   pm_warninglist:
+      description: list all player warnings
+      usage: /pm_warninglist <Playername>
+      aliases: pmwl
+   pm_warningpoints:
+      description: list player warning points
+      usage: /pm_warningpoints <Playername>
+      aliases: pmwp
