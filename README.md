@@ -19,7 +19,7 @@ werden kummuliert und ziehen in Folge diverse Konzequenzen nach sich.
 
 Kommandos
 ---------
--pm_splist(alias pmspl) <Spielername> listet alle Arten von Social Points mit deren Punktestand für den jeweiligen Spieler auf
--pm_warning(alias pmw) <Spielername> <+/-Punkte> <Grund> erhöht oder vermindert den Punktestand der Verwarnungen ("warning")
--pm_warninglist(alias pmwl) <Spielername> listet die letzten 3 Verwarnungen eines Spielers auf
--pm_warningpoints(alias pmwp) <Spielername> zeigt den Punktestand der Verwarnungen ("warning") an
+- pm_splist(alias pmspl) <Spielername> listet alle Arten von Social Points mit deren Punktestand für den jeweiligen Spieler auf
+- pm_warning(alias pmw) <Spielername> <+/-Punkte> <Grund> erhöht oder vermindert den Punktestand der Verwarnungen ("warning")
+- pm_warninglist(alias pmwl) <Spielername> listet die letzten 3 Verwarnungen eines Spielers auf
+- pm_warningpoints(alias pmwp) <Spielername> zeigt den Punktestand der Verwarnungen ("warning") an
