@@ -1,0 +1,11 @@
+Types:
+ - Name: warning
+   Props:
+     - PointsBeforeKick=5
+     - PointsBeforeBann=10
+ - Name: ABC
+   Props:
+     - Test=1
+ - Name: DEF
+   Props:
+     - Test= 2

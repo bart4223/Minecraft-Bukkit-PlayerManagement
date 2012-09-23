@@ -50,7 +50,7 @@ public class CommandPMWarningList implements CommandExecutor{
             PlayerManager lPM = Framework.plugin.getPlayerManager();
             List<SocialPointHistory> lSPHList = lPM.getSocialPointHistory(lWarnedPlayer, "warning");
             lPlayer.sendMessage(ChatColor.BLUE.toString() + "Warning History of " + lWarnedPlayer);
-            SimpleDateFormat lSdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            SimpleDateFormat lSdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
             lIndex = 0;
             int lCount = lSPHList.size() - SocialPointManager.MaxShownSPListItems;
             for (Iterator<SocialPointHistory> it = lSPHList.iterator(); it.hasNext();) {

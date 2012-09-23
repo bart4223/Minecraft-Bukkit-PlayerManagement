@@ -65,6 +65,12 @@ public class CommandPMWarning implements CommandExecutor{
             PlayerManager lPM = Framework.plugin.getPlayerManager();
             lPM.increaseSocialPoint(lPlayer.getName(),"warning",lPoints,lReason,lWarnedPlayer);
             lPlayer.sendMessage(ChatColor.GREEN.toString() + "Warning accorded...");
+            if (lPoints > 0) {
+                SocialPointManager.Plugin.getServer().broadcastMessage(ChatColor.RED.toString() + "Warning for " + lWarnedPlayer + " pronounced. Reason: " + lReason);
+            }
+            else {
+                SocialPointManager.Plugin.getServer().broadcastMessage(ChatColor.GREEN.toString() + "Warning for " + lWarnedPlayer + " pronounced. Reason: " + lReason);                
+            }
         }
         return true;
     }
