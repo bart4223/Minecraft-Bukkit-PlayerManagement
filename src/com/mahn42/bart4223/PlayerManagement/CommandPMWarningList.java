@@ -31,25 +31,27 @@ public class CommandPMWarningList implements CommandExecutor{
     
     @Override
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
-        if (aCommandSender instanceof Player) {
-            int lIndex = 0;
-            String lWarnedPlayer = "";
-            Player lPlayer = (Player)aCommandSender;
-            for (String lstr : aStrings) {
-                switch (lIndex) {
-                    case 0:
-                        lWarnedPlayer = lstr;
-                        if (!Framework.plugin.existsPlayer(lWarnedPlayer)) {
-                            lPlayer.sendMessage(ChatColor.RED.toString() + "No valid warned Player!");                           
-                            return true;
-                        }
-                        break;
-                }
-                lIndex++;
+        int lIndex = 0;
+        String lPlayerName = "";
+        for (String lstr : aStrings) {
+            switch (lIndex) {
+                case 0:
+                    lPlayerName = lstr;
+                    if (!Framework.plugin.existsPlayer(lPlayerName)) {
+                        aCommandSender.sendMessage(ChatColor.RED.toString() + "No valid Player!");                           
+                        return true;
+                    }
+                    break;
             }
-            PlayerManager lPM = Framework.plugin.getPlayerManager();
-            List<SocialPointHistory> lSPHList = lPM.getSocialPointHistory(lWarnedPlayer, "warning");
-            lPlayer.sendMessage(ChatColor.BLUE.toString() + "Warning History of " + lWarnedPlayer);
+            lIndex++;
+        }
+        PlayerManager lPM = Framework.plugin.getPlayerManager();
+        if (lPlayerName.length() == 0 && aCommandSender instanceof Player) {
+            lPlayerName = aCommandSender.getName();
+        }
+        if (lPlayerName.length() != 0) {
+            List<SocialPointHistory> lSPHList = lPM.getSocialPointHistory(lPlayerName, "warning");
+            aCommandSender.sendMessage(ChatColor.BLUE.toString() + "Warning History of " + lPlayerName);
             SimpleDateFormat lSdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
             lIndex = 0;
             int lCount = lSPHList.size() - SocialPointManager.MaxShownSPListItems;
@@ -57,15 +59,15 @@ public class CommandPMWarningList implements CommandExecutor{
                 SocialPointHistory lSPH = it.next();
                 if (lIndex >= lCount ) {
                     String lstr = "Points=" + new Integer(lSPH.getAmount()).toString();
-                    lPlayer.sendMessage(ChatColor.GRAY.toString() + lstr);
+                    aCommandSender.sendMessage(ChatColor.GRAY.toString() + lstr);
                     lstr = "Reason=" + lSPH.getReason();
-                    lPlayer.sendMessage(ChatColor.GRAY.toString() + lstr);
+                    aCommandSender.sendMessage(ChatColor.GRAY.toString() + lstr);
                     lstr = "Distributor=" + lSPH.getChargePlayerName();
-                    lPlayer.sendMessage(ChatColor.GRAY.toString() + lstr);
+                    aCommandSender.sendMessage(ChatColor.GRAY.toString() + lstr);
                     lstr = "Timestamp=" + lSdf.format(new Date(lSPH.getTimestamp()));
-                    lPlayer.sendMessage(ChatColor.GRAY.toString() + lstr);
+                    aCommandSender.sendMessage(ChatColor.GRAY.toString() + lstr);
                     if (lIndex < lSPHList.size() - 1 ) {
-                        lPlayer.sendMessage(ChatColor.DARK_GRAY.toString() + "====================================================");
+                        aCommandSender.sendMessage(ChatColor.DARK_GRAY.toString() + "====================================================");
                     }
                 }
                 lIndex++;

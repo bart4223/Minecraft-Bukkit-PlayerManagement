@@ -29,7 +29,7 @@ public class SocialPointListenerWarning implements Listener {
             String lName = aEvent.getSocialPointHistory().getChargePlayerName();
             Player lPlayer = fSocialPointManager.Plugin.getServer().getPlayer(lName);
             lValue = (Integer)fSocialPointManager.getSocialPointTypePropValue("warning", "PointsBeforeBann");
-            if (lSP.getAmount() >= lValue) {
+            if (lValue != null && lSP.getAmount() >= lValue) {
                 lName = aEvent.getSocialPointHistory().getChargePlayerName();
                 fSocialPointManager.Plugin.getServer().broadcastMessage(ChatColor.RED.toString() + "Warnings of Player: " + lName + " exceeded, he was BANNED!");
                 lPlayer.setBanned(true);
@@ -37,7 +37,7 @@ public class SocialPointListenerWarning implements Listener {
             }
             else {
                 lValue = (Integer)fSocialPointManager.getSocialPointTypePropValue("warning", "PointsBeforeKick");
-                if (lSP.getAmount() >= lValue) {
+                if (lValue != null && lSP.getAmount() >= lValue) {
                     fSocialPointManager.Plugin.getServer().broadcastMessage(ChatColor.RED.toString() + "Warnings of Player: " + lName + " exceeded, he was KICKED!");
                     lPlayer.kickPlayer(ChatColor.RED.toString() + "Warnings exceeded, you was KICKED!");
                 }
