@@ -16,11 +16,12 @@ Social Point Types
 ------------------
 Um Eigenschaften für diverse Typen von Social Points zu hinterlegen, muss eine socialpointtypes.yml angelegt werden.
 Ein Beispiel für Verwarnung sieht folgendermaßen aus:
-         Types:
-          - Name: warning
-            Props:
-              - PointsBeforeKick=5
-              - PointsBeforeBann=10
+    
+    Types:
+     - Name: warning
+       Props:
+         - PointsBeforeKick=5
+         - PointsBeforeBann=10
 
 Verwarnung
 ----------
