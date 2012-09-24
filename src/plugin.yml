@@ -6,7 +6,7 @@ depend: [MAHN42-Framework]
 commands:
    pm_splist:
       description: list player social points
-      usage: /pm_splist <Playername>
+      usage: /pm_splist [<Playername>|all]
       aliases: pmspl
    pm_warning:
       description: utters a player warning
@@ -14,9 +14,9 @@ commands:
       aliases: pmw
    pm_warninglist:
       description: list all player warnings
-      usage: /pm_warninglist <Playername>
+      usage: /pm_warninglist [<Playername>]
       aliases: pmwl
    pm_warningpoints:
       description: list player warning points
-      usage: /pm_warningpoints <Playername>
+      usage: /pm_warningpoints[<Playername>|all]
       aliases: pmwp
