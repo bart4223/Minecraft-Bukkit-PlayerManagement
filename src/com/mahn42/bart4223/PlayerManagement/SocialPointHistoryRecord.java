@@ -12,11 +12,11 @@ import com.mahn42.framework.PlayerManager;
  */
 public class SocialPointHistoryRecord implements PlayerManager.SocialPointHistory{
 
-    public SocialPointHistoryRecord(String aPointType, int aPoints, String aReason, String aDistributor, long aTimestamp){
+    public SocialPointHistoryRecord(String aPointType, int aPoints, String aReason, String aPlayer, long aTimestamp){
         fPointType = aPointType;
         fPoints = aPoints;
         fReason = aReason;
-        fDistributor = aDistributor;
+        fPlayer = aPlayer;
         fTimestamp = aTimestamp;
     }
 
@@ -37,7 +37,7 @@ public class SocialPointHistoryRecord implements PlayerManager.SocialPointHistor
 
     @Override
     public String getChargePlayerName() {
-        return fDistributor;
+        return fPlayer;
     }
     
     @Override
@@ -48,7 +48,7 @@ public class SocialPointHistoryRecord implements PlayerManager.SocialPointHistor
     protected String fPointType;
     protected int fPoints;
     protected String fReason;
-    protected String fDistributor;
+    protected String fPlayer;
     protected long fTimestamp;
 
 }

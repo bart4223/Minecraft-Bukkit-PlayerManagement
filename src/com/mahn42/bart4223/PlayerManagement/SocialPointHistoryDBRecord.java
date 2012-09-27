@@ -5,8 +5,6 @@
 package com.mahn42.bart4223.PlayerManagement;
 
 import com.mahn42.framework.DBRecord;
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

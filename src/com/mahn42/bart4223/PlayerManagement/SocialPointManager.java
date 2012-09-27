@@ -71,7 +71,7 @@ public class SocialPointManager implements PlayerManager {
         List<SocialPointHistoryDBRecord> lSPHDBRecords = fSPHDB.getSocialPointsByType(aPlayer, aPointType);
         for (Iterator<SocialPointHistoryDBRecord> it = lSPHDBRecords.iterator(); it.hasNext();) {
             SocialPointHistoryDBRecord lSPHDBRecord = it.next();
-            lResult.add(new SocialPointHistoryRecord(lSPHDBRecord.PointType, lSPHDBRecord.Points, lSPHDBRecord.Reason, lSPHDBRecord.Distributor, lSPHDBRecord.Timestamp));
+            lResult.add(new SocialPointHistoryRecord(lSPHDBRecord.PointType, lSPHDBRecord.Points, lSPHDBRecord.Reason, lSPHDBRecord.Player, lSPHDBRecord.Timestamp));
         }
         return lResult;
     }       
@@ -137,7 +137,7 @@ public class SocialPointManager implements PlayerManager {
         SocialPointDBRecord lSPDBRecord = fSPDB.getSocialPointByType(aPlayer, aPointType, true);
         lSPDBRecord.TotalPoints = lSPDBRecord.TotalPoints + lHRec.Points;
         SocialPoint lSP = getSocialPoint(aPlayer, aPointType);
-        SocialPointHistory lSPH = new SocialPointHistoryRecord(lHRec.PointType, lHRec.Points, lHRec.Reason, lHRec.Distributor, lHRec.Timestamp);
+        SocialPointHistory lSPH = new SocialPointHistoryRecord(lHRec.PointType, lHRec.Points, lHRec.Reason, lHRec.Player, lHRec.Timestamp);
         SocialPointEvent lEvent = new SocialPointEvent(this, lSP, lSPH);    
         lEvent.raise();       
         return lOK;
