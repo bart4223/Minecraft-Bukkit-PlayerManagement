@@ -56,8 +56,7 @@ public class CommandPMSPList implements CommandExecutor{
                 for (OfflinePlayer lOffPlayer : offPlayers) {
                     lPlayerNames.add(lOffPlayer.getName());
                 }
-                Player[] onPlayers = SocialPointManager.Plugin.getServer().getOnlinePlayers();
-                for (Player lOnPlayer : onPlayers) {
+                for (Player lOnPlayer : SocialPointManager.Plugin.getServer().getOnlinePlayers()) {
                     lPlayerNames.add(lOnPlayer.getName());
                 }
             }
