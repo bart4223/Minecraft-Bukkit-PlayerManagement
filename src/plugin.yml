@@ -1,9 +1,13 @@
 ## YAML Template.
 name: PlayerManagement
 main: com.mahn42.bart4223.PlayerManagement.PlayerManagement
-version: 0.1
+version: 0.2
 depend: [MAHN42-Framework]
 commands:
+   pm_pslist:
+      description: list player statistic
+      usage: /pm_pslist [<Playername>]
+      aliases: pmpsl
    pm_splist:
       description: list player social points
       usage: /pm_splist [<Playername>|all]

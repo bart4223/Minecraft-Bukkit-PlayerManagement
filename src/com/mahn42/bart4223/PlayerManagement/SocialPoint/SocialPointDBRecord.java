@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mahn42.bart4223.PlayerManagement;
+package com.mahn42.bart4223.PlayerManagement.SocialPoint;
 
 import com.mahn42.framework.DBRecord;
 import java.util.ArrayList;

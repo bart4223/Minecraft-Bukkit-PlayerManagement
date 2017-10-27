@@ -4,6 +4,14 @@
  */
 package com.mahn42.bart4223.PlayerManagement;
 
+import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMSPList;
+import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMWarning;
+import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMWarningList;
+import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMWarningPoints;
+import com.mahn42.bart4223.PlayerManagement.SocialPoint.SocialPointListenerWarning;
+import com.mahn42.bart4223.PlayerManagement.SocialPoint.SocialPointManager;
+import com.mahn42.bart4223.PlayerManagement.SocialPoint.SocialPointType;
+import com.mahn42.bart4223.PlayerManagement.Statistic.PlayerStatisticManager;
 import com.mahn42.framework.Framework;
 import java.io.File;
 import java.util.Iterator;
@@ -27,10 +35,13 @@ public class PlayerManagement extends JavaPlugin {
     }
 
     public SocialPointManager SocialPointManager;
+    public PlayerStatisticManager PlayerStatisticManager;
     
     @Override
     public void onEnable() {
       fLog = this.getLogger();
+      PlayerStatisticManager = new PlayerStatisticManager(this);
+      PlayerStatisticManager.Initialize();
       SocialPointManager = new SocialPointManager(this);
       Framework.plugin.registerPlayerManager(SocialPointManager);
       readPlayerManagementConfig();
@@ -51,6 +62,12 @@ public class PlayerManagement extends JavaPlugin {
     protected FileConfiguration fSocialPointTypesConfig;
     protected File fSocialPointTypesConfigFile;
 
+    protected void readPlayerManagementConfig() {
+        FileConfiguration lConfig = getConfig();
+        SocialPointManager.MaxShownSPListItems = lConfig.getInt("MaxShownSPListItems");
+        SocialPointManager.MaxSPHistoryItems = lConfig.getInt("MaxSPHistoryItems");
+    }
+
     protected void LoadSocialPointTypesConfig() {
         if (fSocialPointTypesConfigFile == null) {
             fSocialPointTypesConfigFile = new File(getDataFolder(), "socialpointtypes.yml");
@@ -64,13 +81,7 @@ public class PlayerManagement extends JavaPlugin {
         }
         return fSocialPointTypesConfig;
     }
-    
-    protected void readPlayerManagementConfig() {
-        FileConfiguration lConfig = getConfig();
-        SocialPointManager.MaxShownSPListItems = lConfig.getInt("MaxShownSPListItems");
-        SocialPointManager.MaxSPHistoryItems = lConfig.getInt("MaxSPHistoryItems");
-    }
-    
+
     protected void readSocialPointTypesConfig() {
         FileConfiguration lConfig = getSocialPointTypesConfig();
         if (lConfig != null) {

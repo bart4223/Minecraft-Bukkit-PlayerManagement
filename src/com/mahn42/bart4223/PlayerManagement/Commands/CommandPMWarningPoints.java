@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mahn42.bart4223.PlayerManagement;
+package com.mahn42.bart4223.PlayerManagement.Commands;
 
+import com.mahn42.bart4223.PlayerManagement.SocialPoint.SocialPointManager;
 import com.mahn42.framework.Framework;
 import com.mahn42.framework.PlayerManager;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -20,11 +20,11 @@ import org.bukkit.entity.Player;
  *
  * @author Nils
  */
-public class CommandPMSPList implements CommandExecutor{
+public class CommandPMWarningPoints implements CommandExecutor{
 
-    public SocialPointManager SocialPointManager;
+    public com.mahn42.bart4223.PlayerManagement.SocialPoint.SocialPointManager SocialPointManager;
     
-    public CommandPMSPList(SocialPointManager aSocialPointManager) {
+    public CommandPMWarningPoints(SocialPointManager aSocialPointManager) {
         SocialPointManager = aSocialPointManager;
     }
     
@@ -44,7 +44,6 @@ public class CommandPMSPList implements CommandExecutor{
                     }
                     break;
             }
-            lIndex++;
         }
         if (lPlayerName.length() == 0 || lPlayerName.equalsIgnoreCase("all")) {
             if (aCommandSender instanceof Player && lPlayerName.length() == 0) {
@@ -67,12 +66,10 @@ public class CommandPMSPList implements CommandExecutor{
         PlayerManager lPM = Framework.plugin.getPlayerManager();
         for (Iterator<String> itPN = lPlayerNames.iterator(); itPN.hasNext();) {
             lPlayerName = itPN.next();
-            List<PlayerManager.SocialPoint> lSPList = lPM.getSocialPoints(lPlayerName);
-            aCommandSender.sendMessage(ChatColor.BLUE.toString() + "Social Points of " + lPlayerName);
-            for (Iterator<PlayerManager.SocialPoint> it = lSPList.iterator(); it.hasNext();) {
-                PlayerManager.SocialPoint lSP = it.next();
-                String lstr = lSP.getName() + "=" + new Integer(lSP.getAmount()).toString();
-                aCommandSender.sendMessage(ChatColor.GRAY.toString() + lstr);
+            PlayerManager.SocialPoint lSP = lPM.getSocialPoint(lPlayerName, "warning");
+            if (lSP != null) {
+                aCommandSender.sendMessage(ChatColor.BLUE.toString() + "Warning Points of " + lPlayerName);
+                aCommandSender.sendMessage(ChatColor.GRAY.toString() + "Points=" + new Integer(lSP.getAmount()).toString());
             }
         }
         return true;

@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mahn42.bart4223.PlayerManagement;
+package com.mahn42.bart4223.PlayerManagement.Commands;
 
+import com.mahn42.bart4223.PlayerManagement.SocialPoint.SocialPointManager;
 import com.mahn42.framework.Framework;
 import com.mahn42.framework.PlayerManager;
 import com.mahn42.framework.PlayerManager.SocialPointHistory;
@@ -23,7 +24,7 @@ import org.bukkit.entity.Player;
  */
 public class CommandPMWarningList implements CommandExecutor{
 
-    public SocialPointManager SocialPointManager;
+    public com.mahn42.bart4223.PlayerManagement.SocialPoint.SocialPointManager SocialPointManager;
     
     public CommandPMWarningList(SocialPointManager aSocialPointManager) {
         SocialPointManager = aSocialPointManager;

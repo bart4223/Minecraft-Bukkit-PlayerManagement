@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mahn42.bart4223.PlayerManagement;
+package com.mahn42.bart4223.PlayerManagement.SocialPoint;
 
+import com.mahn42.bart4223.PlayerManagement.PlayerManagement;
 import com.mahn42.framework.Framework;
 import com.mahn42.framework.PlayerManager;
 import com.mahn42.framework.SocialPointEvent;
@@ -30,7 +31,7 @@ public class SocialPointManager implements PlayerManager {
         Framework.plugin.registerSaver(fSPHDB);
     } 
         
-    protected PlayerManagement Plugin; 
+    public PlayerManagement Plugin;
     public int MaxSPHistoryItems;
     public int MaxShownSPListItems;
     
