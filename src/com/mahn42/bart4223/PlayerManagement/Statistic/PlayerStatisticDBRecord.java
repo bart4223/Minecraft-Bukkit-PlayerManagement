@@ -13,6 +13,7 @@ public class PlayerStatisticDBRecord extends DBRecord {
 
     protected static String C_UTCFORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
     protected static String C_LOCALFORMAT = "dd.MM.yyyy HH:mm:ss";
+    protected static DecimalFormat FDecimaFormat = new DecimalFormat("00");
 
     protected static String getUTCDateAsString(Date aDate) {
         DateFormat formatter = new SimpleDateFormat(C_UTCFORMAT);
@@ -39,11 +40,15 @@ public class PlayerStatisticDBRecord extends DBRecord {
     }
 
     protected static String getDurationAsString(Integer aDuration) {
-        double hh = Math.floor( aDuration / 3600 );
-        double mm = Math.floor( (aDuration%3600) / 60 );
-        double ss = Math.floor( aDuration%60 );
-        DecimalFormat format = new DecimalFormat("00");
-        return String.format("%s:%s:%s", format.format(hh), format.format(mm), format.format(ss));
+        double dd = Math.floor(aDuration / 86400);
+        double hh = Math.floor((aDuration%86400) / 3600);
+        double mm = Math.floor((aDuration%3600) / 60);
+        double ss = Math.floor(aDuration%60);
+        String res = String.format("%s:%s:%s", FDecimaFormat.format(hh), FDecimaFormat.format(mm), FDecimaFormat.format(ss));
+        if (dd > 0.0) {
+            res = String.format("%.0f Tag(e) %s", dd, res);
+        }
+        return res;
     }
 
     public String Player;
