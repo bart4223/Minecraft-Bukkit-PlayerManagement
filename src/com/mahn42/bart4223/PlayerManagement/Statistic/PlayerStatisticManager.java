@@ -1,6 +1,7 @@
 package com.mahn42.bart4223.PlayerManagement.Statistic;
 
 import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMPSList;
+import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMPSTop;
 import com.mahn42.bart4223.PlayerManagement.PlayerManagement;
 import com.mahn42.framework.Framework;
 import org.bukkit.entity.Player;
@@ -73,6 +74,7 @@ public class PlayerStatisticManager implements Listener {
         Framework.plugin.registerSaver(FDBPlayerStatistic);
         FOwner.getServer().getPluginManager().registerEvents(this, FOwner);
         FOwner.getCommand("pm_pslist").setExecutor(new CommandPMPSList(this));
+        FOwner.getCommand("pm_pstop").setExecutor(new CommandPMPSTop(this));
     }
 
     @EventHandler
@@ -100,6 +102,19 @@ public class PlayerStatisticManager implements Listener {
             }
         }
         return null;
+    }
+
+    public PlayerStatisticDBRecord getTopPlayer() {
+        PlayerStatisticDBRecord res = null;
+        Iterator<PlayerStatisticDBRecord> itr = getPlayers();
+        while (itr.hasNext()) {
+            PlayerStatisticDBRecord player = itr.next();
+            if (res == null || res.TotalDuration < player.TotalDuration) {
+                res = player;
+            }
+
+        }
+        return res;
     }
 
 }
