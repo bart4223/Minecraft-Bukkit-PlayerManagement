@@ -31,7 +31,7 @@ public class CommandPMPSList implements CommandExecutor {
             Collections.sort(players, new Comparator<PlayerStatisticDBRecord>(){
                 @Override
                 public int compare(PlayerStatisticDBRecord p1, PlayerStatisticDBRecord p2) {
-                    return p1.Player.compareTo(p2.Player);
+                    return p1.Player.toUpperCase().compareTo(p2.Player.toUpperCase());
                 }
             });
             for (PlayerStatisticDBRecord player : players) {
