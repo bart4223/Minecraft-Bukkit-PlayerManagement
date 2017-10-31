@@ -7,6 +7,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class CommandPMPSList implements CommandExecutor {
@@ -20,10 +23,19 @@ public class CommandPMPSList implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
         if (aStrings.length == 0) {
+            ArrayList<PlayerStatisticDBRecord> players = new ArrayList<PlayerStatisticDBRecord>();
             Iterator<PlayerStatisticDBRecord> itr = PlayerStatisticManager.getPlayers();
             while (itr.hasNext()) {
-                PlayerStatisticDBRecord rec = itr.next();
-                aCommandSender.sendMessage(String.format("%s%s %s (%s)", ChatColor.GREEN.toString(), rec.Player, rec.getLastLoginAsString(), rec.getLastDurationAsString()));
+                players.add(itr.next());
+            }
+            Collections.sort(players, new Comparator<PlayerStatisticDBRecord>(){
+                @Override
+                public int compare(PlayerStatisticDBRecord p1, PlayerStatisticDBRecord p2) {
+                    return p1.Player.compareTo(p2.Player);
+                }
+            });
+            for (PlayerStatisticDBRecord player : players) {
+                aCommandSender.sendMessage(String.format("%s%s %s (%s)", ChatColor.GREEN.toString(), player.Player, player.getLastLoginAsString(), player.getLastDurationAsString()));
             }
         } else {
             String playername = "";
