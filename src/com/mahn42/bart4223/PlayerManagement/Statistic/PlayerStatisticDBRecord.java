@@ -57,6 +57,8 @@ public class PlayerStatisticDBRecord extends DBRecord {
     public Date CurrentLogin;
     public Integer TotalDuration;
     public Integer LastDuration;
+    public Integer BlocksBreak;
+    public Integer BlocksPlaced;
 
     public PlayerStatisticDBRecord() {
         this("");
@@ -69,6 +71,8 @@ public class PlayerStatisticDBRecord extends DBRecord {
         CurrentLogin = new Date();
         TotalDuration = 0;
         LastDuration = 0;
+        BlocksBreak = 0;
+        BlocksPlaced = 0;
     }
 
     @Override
@@ -80,6 +84,8 @@ public class PlayerStatisticDBRecord extends DBRecord {
         aCols.add(getUTCDateAsString(CurrentLogin));
         aCols.add(TotalDuration);
         aCols.add(LastDuration);
+        aCols.add(BlocksBreak);
+        aCols.add(BlocksPlaced);
     }
 
     @Override
@@ -91,6 +97,16 @@ public class PlayerStatisticDBRecord extends DBRecord {
         CurrentLogin = getDateFromString(aCols.pop());
         TotalDuration = aCols.popInt();
         LastDuration = aCols.popInt();
+        BlocksBreak = aCols.popInt();
+        BlocksPlaced = aCols.popInt();
+    }
+
+    public void AddBlockBreak() {
+        BlocksBreak++;
+    }
+
+    public void AddBlockPlaced() {
+        BlocksPlaced++;
     }
 
     public Boolean IsPlayer(String aName) {

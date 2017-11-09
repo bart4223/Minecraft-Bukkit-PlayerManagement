@@ -7,6 +7,8 @@ import com.mahn42.framework.Framework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -89,8 +91,30 @@ public class PlayerStatisticManager implements Listener {
         PlayerLogoff(player.getDisplayName());
     }
 
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event){
+        Player player  = event.getPlayer();
+        PlayerStatisticDBRecord rec = getPlayer(player);
+        if (rec != null) {
+            rec.AddBlockBreak();
+        }
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event){
+        Player player  = event.getPlayer();
+        PlayerStatisticDBRecord rec = getPlayer(player);
+        if (rec != null) {
+            rec.AddBlockPlaced();
+        }
+    }
+
     public Iterator<PlayerStatisticDBRecord> getPlayers() {
         return FDBPlayerStatistic.iterator();
+    }
+
+    public PlayerStatisticDBRecord getPlayer(Player aPlayer) {
+        return getPlayer(aPlayer.getName());
     }
 
     public PlayerStatisticDBRecord getPlayer(String aPlayer) {

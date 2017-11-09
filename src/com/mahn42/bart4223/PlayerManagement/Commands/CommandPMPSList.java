@@ -49,6 +49,8 @@ public class CommandPMPSList implements CommandExecutor {
             if (rec != null) {
                 aCommandSender.sendMessage(String.format("%s%s %s (%s)", ChatColor.DARK_GREEN.toString(), rec.Player, rec.getFirstLoginAsString(), rec.getTotalDurationAsString()));
                 aCommandSender.sendMessage(String.format("%s%s %s (%s)", ChatColor.GREEN.toString(), rec.Player, rec.getLastLoginAsString(), rec.getLastDurationAsString()));
+                aCommandSender.sendMessage(String.format("%s%s Blocks break %d", ChatColor.GREEN.toString(), rec.Player, rec.BlocksBreak));
+                aCommandSender.sendMessage(String.format("%s%s Blocks placed %d", ChatColor.GREEN.toString(), rec.Player, rec.BlocksPlaced));
             } else {
                 aCommandSender.sendMessage(ChatColor.RED.toString() + "No valid Player!");
             }
