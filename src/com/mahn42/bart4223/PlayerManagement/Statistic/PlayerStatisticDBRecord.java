@@ -59,6 +59,8 @@ public class PlayerStatisticDBRecord extends DBRecord {
     public Integer LastDuration;
     public Integer BlocksBreak;
     public Integer BlocksPlaced;
+    public Integer KillsPlayer;
+    public Integer KillsNPC;
 
     public PlayerStatisticDBRecord() {
         this("");
@@ -73,6 +75,8 @@ public class PlayerStatisticDBRecord extends DBRecord {
         LastDuration = 0;
         BlocksBreak = 0;
         BlocksPlaced = 0;
+        KillsPlayer = 0;
+        KillsNPC = 0;
     }
 
     @Override
@@ -86,6 +90,8 @@ public class PlayerStatisticDBRecord extends DBRecord {
         aCols.add(LastDuration);
         aCols.add(BlocksBreak);
         aCols.add(BlocksPlaced);
+        aCols.add(KillsPlayer);
+        aCols.add(KillsNPC);
     }
 
     @Override
@@ -99,6 +105,8 @@ public class PlayerStatisticDBRecord extends DBRecord {
         LastDuration = aCols.popInt();
         BlocksBreak = aCols.popInt();
         BlocksPlaced = aCols.popInt();
+        KillsPlayer = aCols.popInt();
+        KillsNPC = aCols.popInt();
     }
 
     public void AddBlockBreak() {
@@ -107,6 +115,14 @@ public class PlayerStatisticDBRecord extends DBRecord {
 
     public void AddBlockPlaced() {
         BlocksPlaced++;
+    }
+
+    public void AddKillsPlayer() {
+        KillsPlayer++;
+    }
+
+    public void AddKillsNPC() {
+        KillsNPC++;
     }
 
     public Boolean IsPlayer(String aName) {

@@ -4,11 +4,15 @@ import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMPSList;
 import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMPSTop;
 import com.mahn42.bart4223.PlayerManagement.PlayerManagement;
 import com.mahn42.framework.Framework;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -79,19 +83,19 @@ public class PlayerStatisticManager implements Listener {
         FOwner.getCommand("pm_pstop").setExecutor(new CommandPMPSTop(this));
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void playerLogin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         PlayerLogin(player.getDisplayName());
     }
 
-    @EventHandler
+    @EventHandler (priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void playerLogoff(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         PlayerLogoff(player.getDisplayName());
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event){
         Player player  = event.getPlayer();
         PlayerStatisticDBRecord rec = getPlayer(player);
@@ -100,12 +104,44 @@ public class PlayerStatisticManager implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onBlockPlace(BlockPlaceEvent event){
         Player player  = event.getPlayer();
         PlayerStatisticDBRecord rec = getPlayer(player);
         if (rec != null) {
             rec.AddBlockPlaced();
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onNPCDamagedByPlayer(EntityDamageByEntityEvent e) {
+        if (e.getDamager() instanceof Player) {
+            Player killer = (Player)e.getDamager();
+            if (e.getEntity() instanceof LivingEntity && e.getEntityType() != EntityType.PLAYER) {
+                LivingEntity killed = (LivingEntity)e.getEntity();
+                if (killed.isDead() || killed.getHealth() - e.getDamage() <= 0.0) {
+                    PlayerStatisticDBRecord rec = getPlayer(killer);
+                    if (rec != null) {
+                        rec.AddKillsNPC();
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPlayerDamagedByPlayer(EntityDamageByEntityEvent e) {
+        if (e.getDamager() instanceof Player) {
+            Player killer = (Player)e.getDamager();
+            if (e.getEntity() instanceof LivingEntity && e.getEntityType() == EntityType.PLAYER) {
+                LivingEntity killed = (LivingEntity)e.getEntity();
+                if (killed.isDead() || killed.getHealth() - e.getDamage() <= 0.0) {
+                    PlayerStatisticDBRecord rec = getPlayer(killer);
+                    if (rec != null) {
+                        rec.AddKillsPlayer();
+                    }
+                }
+            }
         }
     }
 
@@ -136,7 +172,6 @@ public class PlayerStatisticManager implements Listener {
             if (res == null || res.TotalDuration < player.TotalDuration) {
                 res = player;
             }
-
         }
         return res;
     }
