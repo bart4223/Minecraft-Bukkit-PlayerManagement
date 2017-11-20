@@ -15,6 +15,10 @@ Es werden diverse Statistiken zu einem Player erfasst.
 - letzter Login auf dem Server
 - Gesamtspielzeit auf dem Server
 - letzte Spielzeit auf dem Server
+- abgebaute Blöcke auf dem Server
+- gesetzte Blöcke auf dem Server
+- NPC Kills auf dem Server
+- Player Kills auf dem Server
 
 Social Points
 -------------
@@ -42,6 +46,9 @@ Kommandos
 - pm_pstop(alias pmpst) = listet den Spieler mit der meisten Spielzeit auf
 - pm_pslist(alias pmpsl) = listet alle Spieler und deren letzten Logins und letzte Spielzeit auf
 - pm_pslist(alias pmpsl) [Spielername] = listet vom Spieler den ersten und letzten Login, die Gesamt- und die letzte Spielzeit auf
+- pm_pnadd(alias pmpna) [News] = fügt eine News mit "Normal" hinzu
+- pm_pnadd(alias pmpna) [0,1,2] [News] = fügt eine News hinzu (0 = Normal, 1 = Important, 2 = Very Important)
+- pm_pnlist(alias pmpnl) = listet alle News seit dem letzten Login auf
 - pm_splist(alias pmspl) [Spielername|all] = listet alle Arten von Social Points mit deren Punktestand für den jeweiligen Spieler auf
 - pm_warning(alias pmw) [Spielername] [+/-Punkte] [Grund] = erhöht oder vermindert den Punktestand der Verwarnungen ("warning")
 - pm_warninglist(alias pmwl) [Spielername] = listet die letzten 3 Verwarnungen eines Spielers auf

@@ -8,6 +8,7 @@ import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMSPList;
 import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMWarning;
 import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMWarningList;
 import com.mahn42.bart4223.PlayerManagement.Commands.CommandPMWarningPoints;
+import com.mahn42.bart4223.PlayerManagement.News.PlayerNewsManager;
 import com.mahn42.bart4223.PlayerManagement.SocialPoint.SocialPointListenerWarning;
 import com.mahn42.bart4223.PlayerManagement.SocialPoint.SocialPointManager;
 import com.mahn42.bart4223.PlayerManagement.SocialPoint.SocialPointType;
@@ -36,12 +37,15 @@ public class PlayerManagement extends JavaPlugin {
 
     public SocialPointManager SocialPointManager;
     public PlayerStatisticManager PlayerStatisticManager;
+    public PlayerNewsManager PlayerNewsManager;
     
     @Override
     public void onEnable() {
       fLog = this.getLogger();
       PlayerStatisticManager = new PlayerStatisticManager(this);
       PlayerStatisticManager.Initialize();
+      PlayerNewsManager = new PlayerNewsManager(this);
+      PlayerNewsManager.Initialize();
       SocialPointManager = new SocialPointManager(this);
       Framework.plugin.registerPlayerManager(SocialPointManager);
       readPlayerManagementConfig();

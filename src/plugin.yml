@@ -1,7 +1,7 @@
 ## YAML Template.
 name: PlayerManagement
 main: com.mahn42.bart4223.PlayerManagement.PlayerManagement
-version: 0.7
+version: 0.8
 depend: [MAHN42-Framework]
 commands:
    pm_pslist:
@@ -12,6 +12,14 @@ commands:
       description: top player statistic
       usage: /pm_pstop
       aliases: pmpst
+   pm_pnadd:
+      description: add a player news
+      usage: /pm_pnadd
+      aliases: pmpna
+   pm_pnlist:
+      description: list the player news
+      usage: /pm_pnlist
+      aliases: pmpnl
    pm_splist:
       description: list player social points
       usage: /pm_splist [<Playername>|all]
