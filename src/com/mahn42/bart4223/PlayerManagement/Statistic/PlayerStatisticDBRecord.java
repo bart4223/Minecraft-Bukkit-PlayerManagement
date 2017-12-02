@@ -61,6 +61,9 @@ public class PlayerStatisticDBRecord extends DBRecord {
     public Integer BlocksPlaced;
     public Integer KillsPlayer;
     public Integer KillsNPC;
+    public Integer LastPositionX;
+    public Integer LastPositionY;
+    public Integer LastPositionZ;
 
     public PlayerStatisticDBRecord() {
         this("");
@@ -77,6 +80,9 @@ public class PlayerStatisticDBRecord extends DBRecord {
         BlocksPlaced = 0;
         KillsPlayer = 0;
         KillsNPC = 0;
+        LastPositionX = 0;
+        LastPositionY = 0;
+        LastPositionZ = 0;
     }
 
     @Override
@@ -92,6 +98,9 @@ public class PlayerStatisticDBRecord extends DBRecord {
         aCols.add(BlocksPlaced);
         aCols.add(KillsPlayer);
         aCols.add(KillsNPC);
+        aCols.add(LastPositionX);
+        aCols.add(LastPositionY);
+        aCols.add(LastPositionZ);
     }
 
     @Override
@@ -107,6 +116,9 @@ public class PlayerStatisticDBRecord extends DBRecord {
         BlocksPlaced = aCols.popInt();
         KillsPlayer = aCols.popInt();
         KillsNPC = aCols.popInt();
+        LastPositionX = aCols.popInt();
+        LastPositionY = aCols.popInt();
+        LastPositionZ = aCols.popInt();
     }
 
     public void AddBlockBreak() {
@@ -143,6 +155,10 @@ public class PlayerStatisticDBRecord extends DBRecord {
 
     public String getLastDurationAsString() {
         return getDurationAsString(LastDuration);
+    }
+
+    public String getLastPositionAsString() {
+        return String.format("%d %d %d", LastPositionX, LastPositionY, LastPositionZ);
     }
 
 }

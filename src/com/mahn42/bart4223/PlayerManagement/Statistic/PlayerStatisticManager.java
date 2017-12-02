@@ -46,23 +46,26 @@ public class PlayerStatisticManager implements Listener {
         return FDBPlayerStatistic.newRecord(aPlayer);
     }
 
-    protected void PlayerLogin(String aPlayer) {
-        PlayerStatisticDBRecord rec = FDBPlayerStatistic.getRecord(aPlayer);
+    protected void PlayerLogin(Player aPlayer) {
+        PlayerStatisticDBRecord rec = FDBPlayerStatistic.getRecord(aPlayer.getDisplayName());
         if (rec == null) {
-            rec = newPlayer(aPlayer);
+            rec = newPlayer(aPlayer.getDisplayName());
         }
         rec.CurrentLogin = new Date();
         writeInfo(String.format("Player %s logged in.", aPlayer));
     }
 
-    protected void PlayerLogoff(String aPlayer) {
-        PlayerStatisticDBRecord rec = FDBPlayerStatistic.getRecord(aPlayer);
+    protected void PlayerLogoff(Player aPlayer) {
+        PlayerStatisticDBRecord rec = FDBPlayerStatistic.getRecord(aPlayer.getDisplayName());
         Date now = new Date();
         Integer duration = (int)((now.getTime() - rec.CurrentLogin.getTime()) / 1000);
         rec.LastDuration = duration;
         rec.TotalDuration = rec.TotalDuration + duration;
         rec.LastLogin = rec.CurrentLogin;
         rec.CurrentLogin = new Date(0);
+        rec.LastPositionX = aPlayer.getLocation().getBlockX();
+        rec.LastPositionY = aPlayer.getLocation().getBlockY();
+        rec.LastPositionZ = aPlayer.getLocation().getBlockZ();
         writeInfo(String.format("Player %s logged off.", aPlayer));
     }
 
@@ -86,13 +89,13 @@ public class PlayerStatisticManager implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void playerLogin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        PlayerLogin(player.getDisplayName());
+        PlayerLogin(player);
     }
 
     @EventHandler (priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void playerLogoff(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        PlayerLogoff(player.getDisplayName());
+        PlayerLogoff(player);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

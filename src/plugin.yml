@@ -1,7 +1,7 @@
 ## YAML Template.
 name: PlayerManagement
 main: com.mahn42.bart4223.PlayerManagement.PlayerManagement
-version: 0.8
+version: 0.9
 depend: [MAHN42-Framework]
 commands:
    pm_pslist:
